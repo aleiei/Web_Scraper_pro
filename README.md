@@ -207,6 +207,18 @@ From `manifest.json`:
 - Scrape responsibly (reasonable volume/frequency)
 - Validate extracted data before downstream usage
 
+### OSINT Usage (Responsible Use)
+
+With proper care and legal/ethical attention, this web scraper can also support
+OSINT (Open Source Intelligence) workflows on publicly available sources.
+
+When using it for OSINT:
+
+- collect only publicly accessible information
+- avoid personal data misuse and privacy violations
+- follow local laws, platform terms, and investigation policies
+- document sources and keep evidence handling transparent
+
 ---
 
 ## 📦 Compatibility
@@ -226,5 +238,5 @@ From `manifest.json`:
 
 ## 📄 License
 
-This project is licensed under the **GNU General Public License v3.0 (GPL v3)**.
+This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.
 Copyright © Alessandro Orlando.

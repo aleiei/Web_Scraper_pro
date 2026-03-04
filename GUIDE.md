@@ -254,6 +254,18 @@ https://example.com/robots.txt
 
 If it contains restrictive rules for your target paths, do not scrape those paths.
 
+### OSINT Usage (Responsible Use)
+
+With proper care and legal/ethical attention, Web Scraper Pro can also be used
+for OSINT (Open Source Intelligence) on publicly available sources.
+
+For OSINT workflows:
+
+- target only public information
+- avoid privacy violations and unlawful profiling
+- comply with local laws, platform rules, and internal procedures
+- preserve source references and maintain clear audit trails
+
 ---
 
 ## 🐛 Troubleshooting
@@ -368,7 +380,7 @@ Official docs: https://developer.chrome.com/docs/webstore/
 
 ## 📄 License
 
-This project is licensed under the **GNU General Public License v3.0 (GPL v3)**.
+This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.
 Copyright © Alessandro Orlando.
 
 ---
