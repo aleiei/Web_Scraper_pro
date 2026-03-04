@@ -19,16 +19,16 @@ Web Scraper Pro is a **professional Google Chrome extension** that lets you extr
 
 ### Method 1: Developer Mode (Recommended for developers)
 
-1. **Clone or download the `chrome_extension_free` folder**
+1. **Clone or download the `Web_Scraper_pro` folder**
 2. Open Chrome and go to: `chrome://extensions/`
 3. Enable **Developer mode** (top-right switch)
 4. Click **Load unpacked**
-5. Select the `chrome_extension_free` folder
+5. Select the `Web_Scraper_pro` folder
 6. Done! The extension is installed
 
 ### Method 2: Load from ZIP
 
-1. Compress the `chrome_extension_free` folder into a ZIP
+1. Compress the `Web_Scraper_pro` folder into a ZIP
 2. (Optional) rename it to `web-scraper-pro.crx`
 3. Drag the file into `chrome://extensions/`
 
@@ -329,7 +329,7 @@ For OSINT workflows:
 ### File Structure
 
 ```text
-chrome_extension_free/
+Web_Scraper_pro/
 ├── manifest.json       # Extension config
 ├── popup.html          # Main UI
 ├── popup.js            # Popup logic
