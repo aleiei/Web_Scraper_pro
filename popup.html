@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: min(1100px, 100vw);
+            min-height: 600px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+            background: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            background: #ddd;
+            border-bottom: 2px solid #999;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: #ddd;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn:hover {
+            background: #ccc;
+        }
+
+        .tab-btn.active {
+            background: white;
+            border-bottom-color: #6366f1;
+            color: #6366f1;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background: white;
+            max-height: 500px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #6366f1;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 5px rgba(99, 102, 241, 0.3);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #6366f1;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #ccc;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #bbb;
+        }
+
+        .quick-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .quick-btn {
+            padding: 20px;
+            border: 2px solid #ddd;
+            background: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .quick-btn:hover {
+            border-color: #6366f1;
+            background: #f0f4ff;
+            transform: translateY(-2px);
+        }
+
+        .quick-btn .icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .results-box {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .result-item {
+            background: white;
+            padding: 10px;
+            margin: 8px 0;
+            border-left: 3px solid #6366f1;
+            border-radius: 3px;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        .setting-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .setting-item label {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .setting-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #6366f1;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            font-size: 16px;
+        }
+
+        .toast.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <h1>🕷️ Web Scraper Pro</h1>
+        <p>Extract smart data from any website</p>
+        <p style="margin-top: 6px; font-size: 13px; opacity: 0.9;">© Alessandro Orlando · GPL-3.0</p>
+    </div>
+
+    <!-- TAB NAVIGATION -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="selector">🎯 Selectors</button>
+        <button class="tab-btn" data-tab="quick">⚡ Quick Scrape</button>
+        <button class="tab-btn" data-tab="history">📋 History</button>
+        <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
+    </div>
+
+    <!-- TAB 1: SELECTORS -->
+    <div id="selector" class="tab-content active">
+        <div class="section">
+            <h2>🎯 Custom Scraper</h2>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Use CSS selectors to extract data</p>
+
+            <div class="form-group">
+                <label>Scraper Name</label>
+                <input type="text" id="scraperName" placeholder="e.g.: News Articles">
+            </div>
+
+            <div class="form-group">
+                <label>Container Selector</label>
+                <input type="text" id="containerSelector" placeholder="e.g.: .product, .article, div.item">
+            </div>
+
+            <div class="form-group">
+                <label>Title Selector</label>
+                <input type="text" id="titleSelector" placeholder="e.g.: h2, .title, .product-name">
+            </div>
+
+            <div class="form-group">
+                <label>Link Selector</label>
+                <input type="text" id="linkSelector" placeholder="e.g.: a, .url, [href]">
+            </div>
+
+            <div class="form-group">
+                <label>Price Selector (optional)</label>
+                <input type="text" id="priceSelector" placeholder="e.g.: .price, .amount">
+            </div>
+
+            <div class="form-group">
+                <label>Description Selector (optional)</label>
+                <input type="text" id="descSelector" placeholder="e.g.: .description, .text, p">
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-secondary" id="autoDetectBtn">🤖 Auto-Detect</button>
+                <button class="btn btn-secondary" id="previewBtn">👁️ Preview</button>
+                <button class="btn btn-primary" id="scrapeBtn">🚀 Scrape</button>
+            </div>
+
+            <div id="autoDetectResults" class="hidden" style="margin-top: 15px; background: #f0f0f0; padding: 15px; border-radius: 8px; border-left: 4px solid #6366f1; position: relative; z-index: 100; display: none;">
+                <h4 style="margin-bottom: 12px; color: #333; font-size: 16px;">✅ Automatically Detected Selectors</h4>
+                <div id="autoDetectContent" style="font-size: 13px; background: white; padding: 12px; border-radius: 5px; margin-bottom: 15px; max-height: 180px; overflow-y: auto; border: 1px solid #ddd; line-height: 1.8;"></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-top: 10px; border-top: 1px solid #ddd;">
+                    <button class="btn btn-primary" id="useAutoDetectBtn">✅ Use Selectors</button>
+                    <button class="btn btn-secondary" id="cancelAutoDetectBtn">❌ Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: QUICK SCRAPE -->
+    <div id="quick" class="tab-content">
+        <div class="section">
+            <h2>⚡ Quick Scraping</h2>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Extract quickly from common pages</p>
+
+            <div class="quick-buttons">
+                <button class="quick-btn" data-type="links">
+                    <span class="icon">🔗</span>
+                    All Links
+                </button>
+                <button class="quick-btn" data-type="titles">
+                    <span class="icon">📝</span>
+                    Titles
+                </button>
+                <button class="quick-btn" data-type="emails">
+                    <span class="icon">✉️</span>
+                    Email
+                </button>
+                <button class="quick-btn" data-type="phones">
+                    <span class="icon">☎️</span>
+                    Phones
+                </button>
+                <button class="quick-btn" data-type="images">
+                    <span class="icon">🖼️</span>
+                    Images
+                </button>
+                <button class="quick-btn" data-type="table">
+                    <span class="icon">📊</span>
+                    Tables
+                </button>
+            </div>
+
+            <div id="quickResults" class="results-box hidden">
+                <h3 id="resultsTitle">Results</h3>
+                <div id="resultsContent"></div>
+                <div class="button-group" style="margin-top: 10px;">
+                    <button class="btn btn-secondary" id="copyResultsBtn">📋 Copy</button>
+                    <button class="btn btn-secondary" id="downloadResultsBtn">⬇️ CSV</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: HISTORY -->
+    <div id="history" class="tab-content">
+        <div class="section">
+            <h2>📋 History</h2>
+            <div id="historyList" style="margin-top: 15px;">
+                <p style="color: #999;">No scraping yet</p>
+            </div>
+            
+            <!-- JSON VIEWER -->
+            <div id="jsonViewer" class="hidden" style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 8px; border: 1px solid #ddd;">
+                <h4 style="margin-top: 0; margin-bottom: 12px; color: #333;">📊 View Detailed JSON</h4>
+                <div id="jsonViewerContent" style="background: white; padding: 12px; border-radius: 5px; font-size: 12px; font-family: monospace; max-height: 300px; overflow-y: auto; border: 1px solid #ddd; line-height: 1.6; white-space: pre-wrap; word-wrap: break-word;"></div>
+                <button class="btn btn-secondary" id="closeJsonViewerBtn" style="margin-top: 10px; width: 100%;">✕ Close</button>
+            </div>
+            
+            <div class="button-group" style="margin-top: 15px; grid-template-columns: 1fr 1fr;">
+                <button class="btn btn-secondary" id="exportHistoryBtn">💾 Export</button>
+                <button class="btn btn-secondary" id="clearHistoryBtn">🗑️ Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: SETTINGS -->
+    <div id="settings" class="tab-content">
+        <div class="section">
+            <h2>⚙️ Settings</h2>
+
+            <div class="setting-item">
+                <label>
+                    <input type="checkbox" id="darkMode">
+                    Dark Theme
+                </label>
+            </div>
+
+            <div class="setting-item">
+                <label>
+                    <input type="checkbox" id="deduplicateData" checked>
+                    Remove Duplicates
+                </label>
+            </div>
+
+            <div class="setting-item">
+                <label>Result Limit</label>
+                <input type="number" id="resultLimit" value="1000" min="1" max="10000" style="margin-top: 5px;">
+            </div>
+
+            <div class="setting-item">
+                <label>📁 Save Folder</label>
+                <select id="downloadFolder" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                    <option value="Downloads">📥 Downloads Folder</option>
+                    <option value="Desktop">🖥️ Desktop</option>
+                    <option value="Documents">📄 Documents</option>
+                    <option value="web_scraper">🕷️ Web Scraper (create folder)</option>
+                </select>
+                <small style="color: #666; display: block; margin-top: 5px;">Choose where files are saved</small>
+            </div>
+
+            <div class="setting-item">
+                <label>
+                    <input type="checkbox" id="autoDownload">
+                    Automatic download (without dialog)
+                </label>
+            </div>
+
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #999; font-size: 12px;">
+                <p>Web Scraper Pro v1.0.0</p>
+                <p>© 2026 Alessandro Orlando · GPL-3.0</p>
+            </div>
+        </div>
+    </div>
+</head>
+<body>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

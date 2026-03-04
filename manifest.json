@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Web Scraper Pro",
+  "version": "1.0.0",
+  "description": "Extract data from any website",
+  "permissions": ["activeTab", "scripting", "storage", "downloads"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Web Scraper Pro",
+    "default_popup": "popup.html",
+    "default_icons": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
