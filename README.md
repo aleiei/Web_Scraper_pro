@@ -1,27 +1,20 @@
-# 🕷️ Web Scraper Pro — Chrome Extension (Free)
+# Web Scraper Pro — Chrome Extension (Free)
 
-Web Scraper Pro is a Chrome extension that helps you extract structured data from web pages quickly.
-It supports both:
+Web Scraper Pro is a Chrome extension that helps you extract structured data from web pages quickly. It supports both custom CSS selector workflows and one-click quick scraping modes. The extension runs locally in your browser and stores history in Chrome local storage.
 
+---
 
-The extension runs locally in your browser and stores history in Chrome local storage.
+## Installation (Developer Mode)
 
+1. Open Chrome and go to `chrome://extensions/`
+2. Enable Developer mode (top-right corner)
+3. Click Load unpacked
+4. Select this project folder: `Web_Scraper_pro`
+5. Pin the extension for quick access from the toolbar
 
-## 🚀 Installation (Developer Mode)
+---
 
-1. Open Chrome and go to:
-
-   ```
-   chrome://extensions/
-   ```
-
-2. Enable **Developer mode** (top-right corner).
-3. Click **Load unpacked**.
-4. Select this project folder: `Web_Scraper_pro`.
-5. Pin the extension if you want quick access from the toolbar.
-
-
-## 📁 Project Structure
+## Project Structure
 
 ```text
 Web_Scraper_pro/
@@ -33,79 +26,54 @@ Web_Scraper_pro/
 └── icons/            # Extension icons
 ```
 
+---
 
-## ✨ Detailed Features
+## Features
 
 ### 1) Custom Scraper (CSS Selectors)
 
-Use your own selectors to extract repeated records from a page.
-
-**Fields available in the UI:**
-
-
-**Useful actions:**
-
-
-This mode is ideal for product cards, blog article lists, directories, and similar repeated layouts.
-
+Use your own selectors to extract repeated records from a page. Available fields in the UI are container, title, link, price, and description. Use Preview to validate selectors before running a full extraction. This mode is ideal for product cards, blog article lists, directories, and similar repeated layouts.
 
 ### 2) Quick Scrape (One-Click Modes)
 
-You can extract common data types instantly:
-
-
-This is useful when you need fast exploration before building custom selectors.
-
+Extracts common data types instantly: links, titles, emails, phones, images, and tables. Useful for fast exploration before building custom selectors.
 
 ### 3) Results Handling
 
-After each scraping run, results can be:
-
-
-CSV generation supports both:
-
-
+After each scraping run, results can be exported as CSV or copied to clipboard. CSV generation supports both custom and quick scrape modes.
 
 ### 4) History
 
-The extension saves recent scraping sessions in local storage, including:
-
-
-You can:
-
-
+The extension saves recent scraping sessions in local storage, including scraper type and name, page URL, extracted item count, and timestamp. History can be viewed in detail or cleared entirely.
 
 ### 5) Download Settings
 
-Configurable options include:
+Configurable options include target folder, auto-download behavior, whitespace trimming, duplicate removal, and URL inclusion. These settings are persisted in `chrome.storage.local`.
 
+---
 
-These settings are persisted in `chrome.storage.local`.
+## How to Use
 
+### Quick Start (2 minutes)
 
-## 🧭 How to Use (Step-by-Step)
+1. Open the target webpage
+2. Click the extension icon
+3. Go to Quick Scrape
+4. Choose a mode (for example: Titles)
+5. Wait for extraction
+6. Click Copy or Download CSV
 
-## Quick Start (2 minutes)
+### Custom Extraction Workflow
 
-1. Open the target webpage.
-2. Click the extension icon.
-3. Go to **Quick Scrape**.
-4. Choose a mode (for example: **Titles**).
-5. Wait for extraction.
-6. Click **Copy** or **Download CSV**.
+1. Open the page you want to scrape
+2. Inspect an element (right-click → Inspect)
+3. Identify a repeated container (example: `.product-card`)
+4. Add inner selectors (title, link, price, description)
+5. Click **Preview** to validate selectors
+6. Click **Scrape** to extract all matching records
+7. Export to CSV or copy results
 
-
-## Custom Extraction Workflow
-
-1. Open the page you want to scrape.
-2. Inspect an element (`Right click` → `Inspect`).
-3. Identify a repeated container (example: `.product-card`).
-4. Add inner selectors (title/link/price/description).
-5. Click **Preview** to validate selectors.
-6. Click **Scrape** to extract all matching records.
-7. Export to CSV or copy results.
-
-### Example HTML
+Example HTML:
 
 ```html
 <div class="product-card">
@@ -115,41 +83,37 @@ These settings are persisted in `chrome.storage.local`.
 </div>
 ```
 
-Example selectors:
+Example selectors: container `.product-card`, title `.product-name`, price `.product-price`, link `a`.
 
+---
 
+## Troubleshooting
 
-## ⚠️ Troubleshooting
+If the extension popup does not work, reload the page and reopen the popup, or disable and re-enable the extension from `chrome://extensions/`.
 
-### Extension popup does not work
+If no data is extracted, check that the selectors are correct and that the page is not dynamically rendered. Try broader selectors first, then refine.
 
+If the CSV is empty or incomplete, verify that the scrape returned results before exporting, and check the download settings.
 
-### No data extracted
+---
 
+## Permissions Summary
 
-### CSV is empty or incomplete
+From `manifest.json`: `activeTab`, `scripting`, `storage`, `downloads`.
 
+---
 
+## Best Practices
 
-## 🔐 Permissions Summary
+Target only public pages without login requirements. Keep extraction volumes moderate and respect `robots.txt` rules. Avoid collecting personal or private data, and do not reuse copyright-protected content.
 
-From `manifest.json`:
+### OSINT Usage
 
+With proper care and legal/ethical attention, this extension can also support OSINT (Open Source Intelligence) workflows on publicly available sources. Target only public information, avoid privacy violations and unlawful profiling, comply with local laws and platform rules, and maintain clear audit trails with source references.
 
+---
 
-## ✅ Best Practices
+## License
 
-
-### OSINT Usage (Responsible Use)
-
-With proper care and legal/ethical attention, this web scraper can also support
-OSINT (Open Source Intelligence) workflows on publicly available sources.
-
-When using it for OSINT:
-
-
-
-## 📄 License
-
-This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.
+This project is licensed under the GNU General Public License v3.0 (GPL-3.0).
 Copyright © Alessandro Orlando.
