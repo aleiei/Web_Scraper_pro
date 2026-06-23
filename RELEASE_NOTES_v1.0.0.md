@@ -8,7 +8,7 @@ Web Scraper Pro is a Chrome extension to quickly extract structured data from we
 
 ## Key Features
 
-Custom scraper with CSS selectors (container, title, link, price, description), quick scrape modes for links, titles, emails, phones, images, and tables, smart selector auto-detection, preview before full extraction, CSV export, copy results to clipboard, local scraping history with detailed JSON viewer, download settings (target folder and auto-download), full English interface and documentation, license GPL-3.0. Can support OSINT use cases when applied responsibly and lawfully on public sources.
+Custom scraper with CSS selectors (container, title, link, price, description), quick scrape modes for links, titles, emails, phones, images, and tables, smart selector auto-detection, preview before full extraction, CSV export, copy results to clipboard, local scraping history with detailed JSON viewer, download settings (target folder and auto-download), full English interface and documentation, license AGPL-3.0. Can support OSINT use cases when applied responsibly and lawfully on public sources.
 
 ## Technical Notes
 
